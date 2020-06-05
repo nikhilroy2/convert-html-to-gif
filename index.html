@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            animation: 2s infinite linear animate;
+            width: 100px;
+            height: 100px;
+            background: red;
+
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(0);
+            }
+
+            100% {
+                transform: translate(50px, 200px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+
+
+    <script src="script.js"></script>
+    
+    <script>
+        window.onload = function() {
+            var element = document.body;
+            var option = {
+                width : element.offsetWidth,
+                height : element.offsetHeight,
+                gifDelay : 200,
+                quality : 10
+            };
+            var html2Gif = new Html2Gif(element, option);
+            html2Gif.oncomplete = function(dataUri) {
+                var link = document.createElement('a');
+                link.innerHTML = 'Download PDF file';
+                link.download = 'file.gif';
+                link.href = dataUri;
+                link.click();
+                link.remove();
+            };
+            html2Gif.start(200, 30);
+        };
+      </script>
+
+</body>
+
+</html>
